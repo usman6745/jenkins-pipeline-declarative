@@ -67,6 +67,7 @@ pipeline {
      //emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
      //}
      //}
+     stage('email-extended') {
 post {
         changed {
             script {
@@ -84,6 +85,7 @@ post {
                 }
             }
         }
+    }
     }
 
 }
