@@ -1,13 +1,14 @@
 pipeline {
   agent any
   parameters {
-    string(description: 'enter ami_id', name: 'ami_id')
-    string(description: 'enter Instance Type', name: 'Instance_type')
-    string(description: 'enter subnet id', name: 'subnetid')
-    string(description: 'enter region name', name: 'region_name')
-    string(description: 'enter Key name', name: 'Key_Name')
-    string(description: 'enter Key-value-name', name: 'Key_Name_Value')
-    choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'keypair_name')
+    string(description: 'enter ami_id', name: 'AMI_ID')
+    string(description: 'enter subnet id', name: 'SUBNET')
+    string(description: 'enter region name', name: 'REGION')
+    string(description: 'enter Key name', name: 'TAG_KEY')
+    string(description: 'enter Key-value-name', name: 'TAG_VALUE')
+    string(description: 'enter instance-type', name: 'INSTANCE_TYPE')
+    string(description: 'enter security-group-id', name: 'SECURITY_GROUP_ID')
+    choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
   }
 
   stages {
@@ -22,8 +23,8 @@ pipeline {
         ]]) {
           git url: 'https://github.com/usman6745/jenkins-aws-ec2-launch.git'
           sh '''
-          chmod +x ec2.sh
-            ./ec2.sh $ami_id $keypair_name $Instance_type $subnetid $region_name $Key_Name $Key_Name_Value
+          chmod +x properfunc.sh
+            ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
         ''' 
           //instanceid-value = sh (
             //echo "$Key_Name_Value"
@@ -54,7 +55,7 @@ pipeline {
       slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
       channel: 'ot-meesho',
       color: 'good',
-        message: 'Jenkins-Slack Intigrated Instance-id: $',
+        message: 'Jenkins-Slack Intigrated Instance-id is Launched',
       //message: 'Instance has launched',
       //message: ' $LaunchInstanceID ',
       teamDomain: 'opstree',
