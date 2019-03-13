@@ -10,7 +10,6 @@ pipeline {
     string(description: 'enter security-group-id', name: 'SECURITY_GROUP_ID')
     choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
   }
-
   stages {
     stage('build') {
       steps {
@@ -27,6 +26,7 @@ pipeline {
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
         ''' 
       }
+    }
     }
  stage('slacknotification') {
  steps{      
