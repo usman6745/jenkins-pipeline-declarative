@@ -90,8 +90,7 @@ pipeline {
   //  }
 //    }
 }
-}
- def notifyStarted() {
+def notifyStarted() {
    // send to email
 
    emailext ( 
@@ -107,3 +106,6 @@ pipeline {
      )
 
  }
+
+}
+ 
