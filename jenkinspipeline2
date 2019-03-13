@@ -35,8 +35,8 @@ pipeline {
  channel: 'ot-meesho',
  color: 'good',
  message: 'Jenkins-Slack Intigrated Instance-id is Launched',
- message: 'Instance has launched',
- message: ' $LaunchInstanceID ',
+ //message: 'Instance has launched',
+ // Build message: ' $LaunchInstanceID ',
  teamDomain: 'opstree',
  tokenCredentialId: 'slack-token'
  }
