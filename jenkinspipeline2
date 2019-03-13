@@ -29,7 +29,7 @@ pipeline {
           //instanceid-value = sh (
             //echo "$Key_Name_Value"
             //script: "aws ec2 describe-instances --filters "Name=tag:"${Key_Name}",Values="${Key_Name_Value}"" | grep '\\[InstanceId]'",
-          returnStatus: true
+          //returnStatus: true
           //) == 0
           //echo "InstanceID is : ${instanceid-value}"
           //sh '''
