@@ -89,15 +89,15 @@ pipeline {
     //}
   //  }
 //    }
-def notify(status) {
-   wrap([$class: 'BuildUser']) {
-       emailext (
-       subject: "${status}: Job ${env.JOB_NAME} ([${env.BUILD_NUMBER})",
-       body: """
-       Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME} (${env.BUILD_NUMBER})</a>""",
-       to: "${BUILD_USER_EMAIL}",
-       from: 'usmansweet19@gmail.com')
-   }
-}
+stage('Email')
+steps{
+        {
+            env.ForEmailPlugin = env.WORKSPACE      
+            emailext attachmentsPattern: 'TestResults\\*.trx',      
+            body: '''${SCRIPT, template="groovy_html.template"}''', 
+            subject: currentBuild.currentResult + " : " + env.JOB_NAME, 
+            to: 'usman6745@gmail.com'
+        }
+        }
 }
 }
