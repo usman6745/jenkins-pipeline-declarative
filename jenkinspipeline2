@@ -27,77 +27,47 @@ pipeline {
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
         ''' 
-          //instanceid-value = sh (
-            //echo "$Key_Name_Value"
-            //script: "aws ec2 describe-instances --filters "Name=tag:"${Key_Name}",Values="${Key_Name_Value}"" | grep '\\[InstanceId]'",
-          //returnStatus: true
-          //) == 0
-          //echo "InstanceID is : ${instanceid-value}"
-          //sh '''
-          //aws ec2 describe-instances --filters "Name=tag:name,Values=web1" > Instance-ID_VALUE
-          //cat Instance-ID_VALUE
-          //'''
-          
-          // Show the select input modal
-          //echo "${ ami_id }"
-          //echo "${key_name}"
-def notifyStarted() {
-   // send to email
-   emailext ( 
-      subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", 
-       body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-         <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-     )
- }
-
-        }
-        //          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-access', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        // some block
-
-
-
       }
     }
-    //stage('slacknotification') {
-      //steps{      
-      //slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
-      //channel: 'ot-meesho',
-      //color: 'good',
-        //message: 'Jenkins-Slack Intigrated Instance-id is Launched',
-      //message: 'Instance has launched',
-      //message: ' $LaunchInstanceID ',
-      //teamDomain: 'opstree',
-      //tokenCredentialId: 'slack-token'
-    //}
- //}
-     //stage('emailnotification') {
-     //steps{
-     //emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
-     //}
-     //}
-    // stage('email-extended') {
-  //   steps{
-//post {
-        //changed {
-            //script {
-                //if (currentBuild.currentResult == 'SUCCESS') { // Other values: SUCCESS, UNSTABLE
-                    ////// Send an email only if the build status has changed from green/unstable to red
-                    //emailext subject: '$DEFAULT_SUBJECT',
-                        //body: '$DEFAULT_CONTENT',
-                        //recipientProviders: [
-                      //      [$class: 'CulpritsRecipientProvider'],
-                    //        [$class: 'DevelopersRecipientProvider'],
-                  //          [$class: 'RequesterRecipientProvider']
-                //        ], 
-              //          replyTo: '$DEFAULT_REPLYTO',
-            //            to: '$DEFAULT_RECIPIENTS'
-          //      }
-        //    }
-      //  }
-    //}
-  //  }
-//    }
+ stage('slacknotification') {
+ steps{      
+ slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
+ channel: 'ot-meesho',
+ color: 'good',
+ message: 'Jenkins-Slack Intigrated Instance-id is Launched',
+ message: 'Instance has launched',
+ message: ' $LaunchInstanceID ',
+ teamDomain: 'opstree',
+ tokenCredentialId: 'slack-token'
+ }
+ }
+     stage('emailnotification') {
+     steps{
+     emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
+     }
+     }
+                                  // stage('email-extended') {
+                                //   steps{
+                              //post {
+                                      //changed {
+                                          //script {
+                                              //if (currentBuild.currentResult == 'SUCCESS') { // Other values: SUCCESS, UNSTABLE
+                                                  ////// Send an email only if the build status has changed from green/unstable to red
+                                                  //emailext subject: '$DEFAULT_SUBJECT',
+                                                      //body: '$DEFAULT_CONTENT',
+                                                      //recipientProviders: [
+                                                    //      [$class: 'CulpritsRecipientProvider'],
+                                                  //        [$class: 'DevelopersRecipientProvider'],
+                                                //          [$class: 'RequesterRecipientProvider']
+                                              //        ], 
+                                            //          replyTo: '$DEFAULT_REPLYTO',
+                                          //            to: '$DEFAULT_RECIPIENTS'
+                                        //      }
+                                      //    }
+                                    //  }
+                                  //}
+                                //  }
+                              //    }
 
 
 
