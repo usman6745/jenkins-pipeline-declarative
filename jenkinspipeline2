@@ -12,7 +12,6 @@ pipeline {
   }
 
   stages {
-
     stage('build') {
       steps {
         withCredentials([[
@@ -68,8 +67,6 @@ pipeline {
                                   //}
                                 //  }
                               //    }
-
-
 
 }
 }
