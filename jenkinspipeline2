@@ -20,25 +20,7 @@ pipeline {
           credentialsId: 'aws-access',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) 
-      //--  
-        def notifyStarted() {
-   // send to email
-
-   emailext ( 
-
-       subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", 
-
-       body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-
-         <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-
-       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-
-     )
-
- }
-  //--      
+        ]])       
         {
           git url: 'https://github.com/usman6745/client-aws-instance-launch1.git'
           sh '''
@@ -59,7 +41,15 @@ pipeline {
           // Show the select input modal
           //echo "${ ami_id }"
           //echo "${key_name}"
-         
+def notifyStarted() {
+   // send to email
+   emailext ( 
+      subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", 
+       body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+         <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+       recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+     )
+ }
 
         }
         //          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-access', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
