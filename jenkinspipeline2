@@ -67,28 +67,37 @@ pipeline {
      //emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
      //}
      //}
-     stage('email-extended') {
-     steps{
-post {
-        changed {
-            script {
-                if (currentBuild.currentResult == 'SUCCESS') { // Other values: SUCCESS, UNSTABLE
-                    // Send an email only if the build status has changed from green/unstable to red
-                    emailext subject: '$DEFAULT_SUBJECT',
-                        body: '$DEFAULT_CONTENT',
-                        recipientProviders: [
-                            [$class: 'CulpritsRecipientProvider'],
-                            [$class: 'DevelopersRecipientProvider'],
-                            [$class: 'RequesterRecipientProvider']
-                        ], 
-                        replyTo: '$DEFAULT_REPLYTO',
-                        to: '$DEFAULT_RECIPIENTS'
-                }
-            }
-        }
-    }
-    }
-    }
-
+    // stage('email-extended') {
+  //   steps{
+//post {
+        //changed {
+            //script {
+                //if (currentBuild.currentResult == 'SUCCESS') { // Other values: SUCCESS, UNSTABLE
+                    ////// Send an email only if the build status has changed from green/unstable to red
+                    //emailext subject: '$DEFAULT_SUBJECT',
+                        //body: '$DEFAULT_CONTENT',
+                        //recipientProviders: [
+                      //      [$class: 'CulpritsRecipientProvider'],
+                    //        [$class: 'DevelopersRecipientProvider'],
+                  //          [$class: 'RequesterRecipientProvider']
+                //        ], 
+              //          replyTo: '$DEFAULT_REPLYTO',
+            //            to: '$DEFAULT_RECIPIENTS'
+          //      }
+        //    }
+      //  }
+    //}
+  //  }
+//    }
+def notify(status) {
+   wrap([$class: 'BuildUser']) {
+       emailext (
+       subject: "${status}: Job ${env.JOB_NAME} ([${env.BUILD_NUMBER})",
+       body: """
+       Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME} (${env.BUILD_NUMBER})</a>""",
+       to: "${BUILD_USER_EMAIL}",
+       from: 'usmansweet19@gmail.com')
+   }
+}
 }
 }
