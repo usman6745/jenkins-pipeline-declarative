@@ -32,6 +32,26 @@ pipeline {
     }   
     }
     
+    //testing one stage value into another stage
+    stage("stage 1") {
+    steps {
+        sh "do_something > var.txt"
+        // I want to get var.txt into VAR
+    }
+}
+stage("stage 2") {
+    steps {
+        build job: "job2", parameters[string(name: "var", value: "${VAR})]
+    }
+}
+
+    
+    
+    
+    
+    
+    
+    
  stage('slacknotification') {
  steps{      
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
