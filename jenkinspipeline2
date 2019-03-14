@@ -40,11 +40,11 @@ pipeline {
  tokenCredentialId: 'slack-token'
  }
  }
-     stage('emailnotification') {
-     steps{
-     emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
-     }
-     }
+     //stage('emailnotification') {
+     //steps{
+     //emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
+     //}
+     //}
                                   // stage('email-extended') {
                                 //   steps{
                               
