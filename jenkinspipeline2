@@ -1,4 +1,3 @@
-
 pipeline {
   agent any
   parameters {
@@ -40,15 +39,19 @@ pipeline {
  steps{    
     script {
     def my_id = ''
+    def my_id2 = ''
 dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
 my_id = sh(script:"head -1 InstanceId", returnStdout: true)
+my_id2 = sh(script:"head -2 InstanceId", returnStdout: true)
 echo "${my_id}"
+echo "${my_id2}"
 }
 echo "${my_id}"
+echo "${my_id2}"
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
  channel: '#ec2-test',
  color: 'good',
- message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ' + my_id,
+ message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ' + my_id + my_id2,
  teamDomain: 'opstree',
  tokenCredentialId: 'slack-token-ec2-test'
  }
