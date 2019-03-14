@@ -34,7 +34,7 @@ pipeline {
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
             cat InstanceId
-           def id_a= sh script:'head -1 InstanceId', returnStdout:true
+           def id_a= 'head -1 InstanceId', returnStdout:true
            id = id_a
            env.id = id
             echo $id
