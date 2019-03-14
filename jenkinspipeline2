@@ -34,8 +34,6 @@ pipeline {
  channel: 'ot-meesho',
  color: 'good',
  message: 'Jenkins-Slack Intigrated Instance-id is Launched',
- //message: 'Instance has launched',
- // Build message: ' $LaunchInstanceID ',
  teamDomain: 'opstree',
  tokenCredentialId: 'slack-token'
  }
@@ -50,26 +48,21 @@ pipeline {
                               
 }
 
-post {
-                                      changed {
-                                      script {
-                                      if (currentBuild.currentResult == 'SUCCESS') { // Other values: SUCCESS, UNSTABLE
+//post {
+  //                                    always {
+    //                                  script {
+      //                                if (currentBuild.currentResult == 'SUCCESS') { // Other values: SUCCESS, UNSTABLE
                                       ////// Send an email only if the build status has changed from green/unstable to red
-                                      emailext subject: '$DEFAULT_SUBJECT',
-                                      body: '$DEFAULT_CONTENT',
-                                      recipientProviders: [
-                                      [$class: 'CulpritsRecipientProvider'],
-                                      [$class: 'DevelopersRecipientProvider'],
-                                      [$class: 'RequesterRecipientProvider']
-                                      ], 
-                                              replyTo: '$DEFAULT_REPLYTO',
-                                                 to: '$DEFAULT_RECIPIENTS'
-                                           }
-                                          }
-                                      }
-                                  }
-                                  }
-                                  }
+        //                              emailext subject: '$DEFAULT_SUBJECT',
+          //                            body: '$DEFAULT_CONTENT',
+            //                          replyTo: '$DEFAULT_REPLYTO',
+              //                        to: '$DEFAULT_RECIPIENTS'
+                                   //        }
+                                     //     }
+                                      //}
+                                 // }
+                                 // }
+                                  //}
 
 
 }
