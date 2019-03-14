@@ -49,16 +49,16 @@ pipeline {
     
     
     
- stage('slacknotification') {
- steps{      
- slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
- channel: 'ot-meesho',
- color: 'good',
- message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is $id',
- teamDomain: 'opstree',
- tokenCredentialId: 'slack-token'
- }
- }
+ //stage('slacknotification') {
+ //steps{      
+ //slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
+ //channel: 'ot-meesho',
+ //color: 'good',
+ //message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is $id',
+ //teamDomain: 'opstree',
+ //tokenCredentialId: 'slack-token'
+ //}
+ //}
      //stage('emailnotification') {
      //steps{
      //emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
