@@ -47,7 +47,7 @@ echo "${my_id}"
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
  channel: '#ec2-test',
  color: 'good',
- message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is "${my_id}"',
+ message: "Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ${my_id}",
  teamDomain: 'opstree',
  tokenCredentialId: 'slack-token-ec2-test'
  }
