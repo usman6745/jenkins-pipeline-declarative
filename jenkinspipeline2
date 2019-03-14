@@ -29,7 +29,7 @@ pipeline {
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
             cat InstanceId
-           `head -1 InstanceId` > my_id 
+           head -1 InstanceId > my_id 
            stash 'my_id'
             //echo $id
            ''' 
