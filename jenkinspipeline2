@@ -28,8 +28,7 @@ pipeline {
          sh 'echo how are you > hello'
          sh 'cat hello'
           sh '''
-          echo ' 
-          '#!/bin/bash'
+          echo ''#!/bin/bash'
           INITIAL_ARGS="$*"
           launch_ec2()
           
