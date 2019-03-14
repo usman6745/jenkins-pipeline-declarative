@@ -29,9 +29,6 @@ pipeline {
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
             cat InstanceId
-           head -1 InstanceId > my_id 
-           stash 'my_id'
-            //echo $id
            ''' 
       }
     }   
@@ -40,14 +37,14 @@ pipeline {
     
     stage('slacknotification') {
  steps{      
- unstash 'my_id'
- sh '''
- id = `cat my_id`
- '''
+dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
+def my_id = `head -1 InstanceId`
+echo $my_id
+}
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
  channel: '#ec2-test',
  color: 'good',
- message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ${id}',
+ message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ${my_id}',
  teamDomain: 'opstree',
  tokenCredentialId: 'slack-token-ec2-test'
  }
