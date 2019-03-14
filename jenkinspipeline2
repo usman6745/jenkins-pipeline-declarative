@@ -42,7 +42,7 @@ pipeline {
     def my_id2 = ''
 dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
 my_id = sh(script:"head -1 InstanceId", returnStdout: true)
-my_id2 = sh(script:"head -2 InstanceId", returnStdout: true)
+my_id2 = sh(script:"head -1 InstanceId2", returnStdout: true)
 echo "${my_id}"
 echo "${my_id2}"
 }
