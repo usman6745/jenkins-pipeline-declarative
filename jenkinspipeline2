@@ -11,12 +11,7 @@ pipeline {
     choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
     
   }
-   
-   environment {
-   id = ''
-   }
-  
-  
+     
   stages {
     stage('build') {
       steps {
@@ -34,12 +29,10 @@ pipeline {
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
             cat InstanceId
-           def id_a= 'head -1 InstanceId', returnStdout:true
-           id = id_a
-           env.id = id
-            echo $id
-            echo $env.id
-        ''' 
+           `head -1 InstanceId` > my_id 
+           stash 'my_id'
+            //echo $id
+           ''' 
       }
     }   
     }
@@ -47,10 +40,13 @@ pipeline {
     
     stage('slacknotification') {
  steps{      
+ unstash 'my_id'
+ sh '''
+ id = `cat my_id`
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
  channel: '#ec2-test',
  color: 'good',
- message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ${env.id}',
+ message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ${id}',
  teamDomain: 'opstree',
  tokenCredentialId: 'slack-token-ec2-test'
  }
