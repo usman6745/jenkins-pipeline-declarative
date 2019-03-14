@@ -39,7 +39,8 @@ pipeline {
  steps{      
 dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
 sh '''
-def my_id = `head -1 InstanceId`
+def my_id 
+my_id = `head -1 InstanceId`
 echo $my_id
 '''
 }
