@@ -4,8 +4,8 @@ pipeline {
     string(description: 'enter ami_id', name: 'AMI_ID', defaultValue: 'ami-0ad42f4f66f6c1cc9')
     string(description: 'enter subnet id', name: 'SUBNET', defaultValue: 'subnet-0b57a25fd5a0448d0')
     string(description: 'enter region name', name: 'REGION', defaultValue: 'ap-south-1')
-    string(description: 'enter Key name', name: 'Name', defaultValue: 'Name')
-    string(description: 'enter Key-value-name', name: 'TAG_VALUE', defaultValue: '')
+    string(description: 'enter Key name', name: 'NAME', defaultValue: 'Name')
+    string(description: 'enter Key-value-name', name: 'NAME_VALUE', defaultValue: '')
     string(description: 'enter number of instances to launch', name: 'Number_Of_Instances', defaultValue: '1')
     string(description: 'enter security-group-id', name: 'SECURITY_GROUP_ID', defaultValue: 'sg-088974251af4f8415')
     choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
@@ -38,8 +38,8 @@ pipeline {
           local KEYPAIR="$2"
           local SUBNET="$3"
           local REGION="$4"
-          local TAG_KEY="$5"
-          local TAG_VALUE="$6"
+          local NAME="$5"
+          local NAME_VALUE="$6"
           local INSTANCE_TYPE="$7"
           local SECURITY_GROUP_ID="$8"
           local Number_Of_Instances="$9"
@@ -58,7 +58,7 @@ pipeline {
     grep InstanceId ec2.txt | tr -d '", "' > InstanceId
     grep KeyName ec2.txt | tr -d '", "' > KeyName
     sed -i 's/:/=/g' InstanceId
-    echo "aws ec2 create-tags --resources ""$"InstanceId" --tags Key=""$"TAG_KEY",Value=""$"TAG_VALUE" --region $REGION" >> InstanceId
+    echo "aws ec2 create-tags --resources ""$"InstanceId" --tags Key=""$"NAME",Value=""$"NAME_VALUE" --region $REGION" >> InstanceId
     chmod +x InstanceId
     ./InstanceId
     id=`head -1 InstanceId`
@@ -71,7 +71,7 @@ launch_ec2 $@
 ' > properfunc.sh
  
           chmod +x properfunc.sh
-            ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID $Number_Of_Instances
+            ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $NAME $NAME_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID $Number_Of_Instances
             cat InstanceId
            ''' 
       }
