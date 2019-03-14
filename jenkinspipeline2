@@ -28,7 +28,7 @@ pipeline {
          
           sh '''
           echo "
-          #!/bin/bash
+          '#!/bin/bash'
           INITIAL_ARGS="$*"
           launch_ec2()
           
