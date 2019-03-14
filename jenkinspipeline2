@@ -8,7 +8,7 @@ pipeline {
     string(description: 'enter Key-value-name', name: 'TAG_VALUE', defaultValue: 'Jee4')
     string(description: 'enter instance-type', name: 'INSTANCE_TYPE', defaultValue: 't2.micro')
     string(description: 'enter security-group-id', name: 'SECURITY_GROUP_ID', defaultValue: 'sg-088974251af4f8415')
-    choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR', defaultValue: 'CI_VPC')
+    choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
   }
   stages {
     stage('build') {
