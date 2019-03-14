@@ -28,7 +28,7 @@ pipeline {
          sh 'echo how are you > hello'
          sh 'cat hello'
           sh '''
-          echo " 
+          echo ' 
           '#!/bin/bash'
           INITIAL_ARGS="$*"
           launch_ec2()
@@ -69,7 +69,7 @@ pipeline {
 }
 #launch_ec2 $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
 launch_ec2 $@          
-" > properfunc.sh
+' > properfunc.sh
  
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID $Number_Of_Instances
