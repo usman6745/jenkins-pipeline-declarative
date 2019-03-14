@@ -40,7 +40,7 @@ pipeline {
 dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
 sh '''
 my_id = `head -1 InstanceId`
-#echo ${my_id}
+echo ${my_id}
 '''
 }
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
