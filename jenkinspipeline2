@@ -27,7 +27,7 @@ pipeline {
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]])
-        
+        {
        
           git url: 'https://github.com/usman6745/client-aws-instance-launch1.git'
           sh '''
@@ -40,7 +40,7 @@ pipeline {
             echo $id
             echo $env.id
         ''' 
-      
+      }
     }   
     }
     
