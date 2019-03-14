@@ -43,6 +43,7 @@ pipeline {
  unstash 'my_id'
  sh '''
  id = `cat my_id`
+ '''
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
  channel: '#ec2-test',
  color: 'good',
