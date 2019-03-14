@@ -56,7 +56,7 @@ pipeline {
     #echo "aws ec2 run-instances --image-id "${AMI_ID}" --count 1 --instance-type "${INSTANCE_TYPE}" --key-name "${KEYPAIR}" --security-group-ids "${SECURITY_GROUP_ID}" --subnet-id "${SUBNET}" --region "${REGION}""
     aws ec2 run-instances --image-id ${AMI_ID} --count ${Number_Of_Instances} --instance-type ${INSTANCE_TYPE} --key-name ${KEYPAIR} --security-group-ids ${SECURITY_GROUP_ID} --subnet-id ${SUBNET} --region ${REGION} > ec2.txt
     #grep InstanceId ec2.txt | tr -d '", "' > InstanceId
-    sed -i 's/"//g' ec2.txt
+    sed -i 's/"/''/g' ec2.txt
     grep InstanceId ec2.txt > InstanceId
     grep KeyName ec2.txt | tr -d '", "' > KeyName
     sed -i 's/:/=/g' InstanceId
