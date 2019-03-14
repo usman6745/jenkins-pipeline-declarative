@@ -7,7 +7,6 @@ pipeline {
     string(description: 'enter Key name', name: 'Name', defaultValue: 'Name')
     string(description: 'enter Key-value-name', name: 'TAG_VALUE', defaultValue: '')
     string(description: 'enter number of instances to launch', name: 'Number_Of_Instances', defaultValue: '1')
-//    string(description: 'enter instance-type', name: 'INSTANCE_TYPE', defaultValue: 't2.micro')
     string(description: 'enter security-group-id', name: 'SECURITY_GROUP_ID', defaultValue: 'sg-088974251af4f8415')
     choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
     choice(choices: ['t2.micro', 't2.medium', 't2.large', 't2.xlarge', 't2.2xlarge'], description: 'choose the type of Instance', name: 'INSTANCE_TYPE' ) 
