@@ -9,8 +9,14 @@ pipeline {
     string(description: 'enter instance-type', name: 'INSTANCE_TYPE', defaultValue: 't2.micro')
     string(description: 'enter security-group-id', name: 'SECURITY_GROUP_ID', defaultValue: 'sg-088974251af4f8415')
     choice(choices: ['CI_VPC', 'test1'], description: 'choose key pair?', name: 'KEYPAIR')
-    string(name: 'custom_var', defaultValue: '')
+    
   }
+   
+   environment {
+   id = ''
+   }
+  
+  
   stages {
     stage('build') {
       steps {
@@ -27,38 +33,25 @@ pipeline {
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
             cat InstanceId
             id=`head -1 InstanceId`
-            echo $id
+            echo $env.id
         ''' 
       }
     }   
     }
     
     
-    stage("make param global") {
-             steps {
-               tmp_param =  sh (script: 'most amazing shell command', returnStdout: true).trim()
-               env.custom_var = tmp_param
-              }
-        }
-        stage("test if param was saved") {
-            steps {
-              echo "${env.custom_var}"
-            }
-        }
+     
     
-    
-    
-    
- //stage('slacknotification') {
- //steps{      
- //slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
- //channel: 'ot-meesho',
- //color: 'good',
- //message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is $id',
- //teamDomain: 'opstree',
- //tokenCredentialId: 'slack-token'
- //}
- //}
+ stage('slacknotification') {
+ steps{      
+ slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
+ channel: 'ot-meesho',
+ color: 'good',
+ message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is $env.id',
+ teamDomain: 'opstree',
+ tokenCredentialId: 'slack-token'
+ }
+ }
      //stage('emailnotification') {
      //steps{
      //emailext attachLog: true, body: 'Hello, this is a test mail', subject: 'Email-Push', to: 'usman.mohammed@opstree.com'
