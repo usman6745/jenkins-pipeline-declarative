@@ -36,7 +36,8 @@ pipeline {
     
     
     stage('slacknotification') {
- steps{      
+ steps{    
+ def my_id
 dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
 sh '''
 my_id = `head -1 InstanceId`
