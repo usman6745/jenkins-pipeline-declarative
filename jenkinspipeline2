@@ -25,15 +25,18 @@ pipeline {
           credentialsId: 'aws-access',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]])       
-        {
+        ]])
+        
+        script {
           git url: 'https://github.com/usman6745/client-aws-instance-launch1.git'
           sh '''
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
             cat InstanceId
-            id=`head -1 InstanceId`
-            env.id = id
+           def id_a= sh script:'head -1 InstanceId', returnStdout:true
+           id = id_a
+           env.id = id
+            echo $id
             echo $env.id
         ''' 
       }
