@@ -52,7 +52,7 @@ pipeline {
  color: 'good',
  message: 'Jenkins-Slack Intigrated Instance-id is Launched - The Instance ID is ${env.id}',
  teamDomain: 'opstree',
- tokenCredentialId: 'slack-token'
+ tokenCredentialId: 'slack-token-ec2-test'
  }
  }
     
