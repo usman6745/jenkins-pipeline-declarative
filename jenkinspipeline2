@@ -38,8 +38,10 @@ pipeline {
     stage('slacknotification') {
  steps{      
 dir ('/var/lib/jenkins/workspace/EC2_Launch-aws'){
+sh '''
 def my_id = `head -1 InstanceId`
 echo $my_id
+'''
 }
  slackSend baseUrl: 'https://opstree.slack.com/services/hooks/jenkins-ci/',
  channel: '#ec2-test',
