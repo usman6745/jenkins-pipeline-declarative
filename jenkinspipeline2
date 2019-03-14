@@ -24,7 +24,7 @@ pipeline {
           sh '''
           chmod +x properfunc.sh
             ./properfunc.sh $AMI_ID $KEYPAIR $SUBNET $REGION $TAG_KEY $TAG_VALUE $INSTANCE_TYPE $SECURITY_GROUP_ID
-            cat ec2.txt
+            cat InstanceId
             echo $id
         ''' 
       }
