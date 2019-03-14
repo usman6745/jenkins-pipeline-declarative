@@ -20,7 +20,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-       script {
+      
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: 'aws-access',
@@ -40,7 +40,7 @@ pipeline {
             echo $id
             echo $env.id
         ''' 
-      }
+      
     }   
     }
     
